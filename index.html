@@ -267,7 +267,81 @@
           <div class="col-1">
             <article><div class="article-info clearfix"><meta itemprop="author" itemscope itemtype="https://schema.org/Person"><meta itemprop="name" content="Shenglong"/></meta></div>
 <div class="js-article-content"><div class="layout--home">
-  <div class="post-list"><article><h1><a href="/2018/07/28/Knowledge-Map.html">Mysql Database</a></h1>
+  <div class="post-list"><article><h1><a href="/2018/08/04/Hash%E7%AE%97%E6%B3%95.html">Hash算法</a></h1>
+        <div class="article-content"><h3 id="散列算法">散列算法</h3>
+<p><em>散列算法(Hash Function)</em> 又称<em>散列函数、哈希算法</em>, 是一种从任何数据中创建小的数字”指纹”的方法。</p>
+
+<p><em>原理</em> 散列函数把数据压缩成_固定格式_的摘要, 使得数据量变小。该函数将数据打乱混合， 重新创建一个叫做散列值的指纹。</p>
+
+<p><em>散列冲突</em> 又称 “散列碰撞”, 所有散列函数都有如下特性:</p>
+<blockquote>
+  <p>如果两个散列值是不相同的, 那么这两个散列值的原始数据必定是不同的。</p>
+</blockquote>
+
+<p>这个特性是因为散列函数都具有_确定性_。然而如果两个散列值相同，两个数据值却可能不同，这种情况称为”散列碰撞”.</p>
+
+<p>散列函数必须具有不可逆性。</p>
+
+<h3 id="散列算法的常见应用">散列算法的常见应用</h3>
+<p>散列函数应用场景广泛, 通常都是为某一目的专门设计的;</p>
+
+<p><em>加密</em> <a href="https://zh.wikipedia.org/wiki/%E5%AF%86%E7%A2%BC%E9%9B%9C%E6%B9%8A%E5%87%BD%E6%95%B8">Wiki 密码散列函数</a></p>
+
+<p>加密散列函数的输入数据通常被称为消息, 输出结果被称为<strong>摘要(digest)</strong>, 主要保证消息在 传输过程中未被篡改;</p>
+
+<ol>
+  <li>理想的加密散列函数应具备的特性:
+    <ul>
+      <li>高效性;</li>
+      <li>不可逆;</li>
+      <li>不可能在不改动散列数值的情况下修改消息内容;</li>
+      <li>对于不同的消息, 不能给出相同的散列值;</li>
+    </ul>
+  </li>
+  <li>保证消息的完整性.</li>
+  <li>散列表.</li>
+  <li>错误检测与矫正</li>
+  <li>语音识别</li>
+</ol>
+
+<p><a href="/2018/08/04/BKDRHash算法">BKDRHash算法及解析</a></p>
+</div><a href="/2018/08/04/Hash%E7%AE%97%E6%B3%95.html">点我阅读更多...</a><div class="article-info clearfix"><meta itemprop="author" itemscope itemtype="https://schema.org/Person"><meta itemprop="name" content="Shenglong"/></meta><ul class="article-info__left-col menu"><li>
+            <a class="button button--secondary button--pill button--sm" href="/archive.html?tag=%E7%AE%97%E6%B3%95">算法</a>
+          </li><li>
+            <a class="button button--secondary button--pill button--sm" href="/archive.html?tag=Hash">Hash</a>
+          </li></ul><ul class="article-info__right-col menu"><li class="publish-date"><span>2018年 08月04日</span></li>
+      </ul></div>
+</article><article><h1><a href="/2018/08/04/Docker.html">初识Docker</a></h1>
+        <div class="article-content">
+</div><a href="/2018/08/04/Docker.html">点我阅读更多...</a><div class="article-info clearfix"><meta itemprop="author" itemscope itemtype="https://schema.org/Person"><meta itemprop="name" content="Shenglong"/></meta><ul class="article-info__left-col menu"><li>
+            <a class="button button--secondary button--pill button--sm" href="/archive.html?tag=%E5%AE%B9%E5%99%A8%E6%8A%80%E6%9C%AF">容器技术</a>
+          </li><li>
+            <a class="button button--secondary button--pill button--sm" href="/archive.html?tag=Docker">Docker</a>
+          </li></ul><ul class="article-info__right-col menu"><li class="publish-date"><span>2018年 08月04日</span></li>
+      </ul></div>
+</article><article><h1><a href="/2018/08/04/BKDRHash%E7%AE%97%E6%B3%95.html">BKDRHash算法</a></h1>
+        <div class="article-content"><h3 id="bkdrhash算法">BKDRHash算法</h3>
+<p>BKDRHash函数是一种字符串哈希算法, 用于处理大规模字符串数据时为每一个字符串分配一个整数ID。</p>
+
+<p>BKDRHash算法java实现:</p>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="kd">public</span> <span class="kd">static</span> <span class="kt">int</span> <span class="nf">bkdrStrHash</span><span class="o">(</span><span class="n">String</span> <span class="n">str</span><span class="o">){</span>
+    <span class="kt">char</span> <span class="n">c</span><span class="o">;</span>
+    <span class="kt">int</span> <span class="n">hash</span> <span class="o">=</span> <span class="mi">0</span><span class="o">,</span> <span class="n">seed</span> <span class="o">=</span> <span class="mi">3</span><span class="o">,</span> <span class="n">index</span> <span class="o">=</span> <span class="mi">0</span><span class="o">,</span> <span class="n">len</span> <span class="o">=</span> <span class="n">str</span><span class="o">.</span><span class="na">length</span><span class="o">();</span>
+    <span class="k">for</span><span class="o">(;</span> <span class="n">index</span> <span class="o">&lt;</span> <span class="n">len</span><span class="o">;</span> <span class="n">index</span><span class="o">++)</span> <span class="o">{</span>
+      <span class="n">c</span> <span class="o">=</span> <span class="n">str</span><span class="o">.</span><span class="na">charAt</span><span class="o">(</span><span class="n">index</span><span class="o">);</span>
+      <span class="n">hash</span> <span class="o">+=</span> <span class="n">Math</span><span class="o">.</span><span class="na">pow</span><span class="o">(</span><span class="n">seed</span><span class="o">,</span> <span class="n">len</span> <span class="o">-</span> <span class="n">index</span> <span class="o">-</span> <span class="mi">1</span><span class="o">)</span> <span class="o">*</span> <span class="n">c</span><span class="o">;</span>
+    <span class="o">}</span>
+    <span class="k">return</span> <span class="n">hash</span><span class="o">;</span>
+  <span class="o">}</span>
+</code></pre></div></div>
+
+</div><a href="/2018/08/04/BKDRHash%E7%AE%97%E6%B3%95.html">点我阅读更多...</a><div class="article-info clearfix"><meta itemprop="author" itemscope itemtype="https://schema.org/Person"><meta itemprop="name" content="Shenglong"/></meta><ul class="article-info__left-col menu"><li>
+            <a class="button button--secondary button--pill button--sm" href="/archive.html?tag=%E7%AE%97%E6%B3%95">算法</a>
+          </li><li>
+            <a class="button button--secondary button--pill button--sm" href="/archive.html?tag=Hash">Hash</a>
+          </li></ul><ul class="article-info__right-col menu"><li class="publish-date"><span>2018年 08月04日</span></li>
+      </ul></div>
+</article><article><h1><a href="/2018/07/28/Knowledge-Map.html">Mysql Database</a></h1>
         <div class="article-content"><h5 id="database">Database</h5>
 
 <table>
@@ -326,6 +400,44 @@
     </tr>
   </tbody>
 </table>
+
+<h5 id="linux">Linux</h5>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left"> </th>
+      <th style="text-align: left"> </th>
+      <th style="text-align: left"> </th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left"><a href="https://www.tecmint.com/linux-commands-cheat-sheet/">Commands</a></td>
+      <td style="text-align: left"> </td>
+      <td style="text-align: left"> </td>
+    </tr>
+  </tbody>
+</table>
+
+<h5 id="log-framework">Log Framework</h5>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left"> </th>
+      <th style="text-align: left"> </th>
+      <th style="text-align: left"> </th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left"><a href="https://logback.qos.ch/">Logback Home</a></td>
+      <td style="text-align: left"><a href="https://logback.qos.ch/manual/layouts.html">Logback Pattern</a></td>
+      <td style="text-align: left"> </td>
+    </tr>
+  </tbody>
+</table>
 </div><a href="/2018/07/28/Knowledge-Map.html">点我阅读更多...</a><div class="article-info clearfix"><meta itemprop="author" itemscope itemtype="https://schema.org/Person"><meta itemprop="name" content="Shenglong"/></meta><ul class="article-info__left-col menu"><li>
             <a class="button button--secondary button--pill button--sm" href="/archive.html?tag=Documents">Documents</a>
           </li><li>
@@ -337,19 +449,6 @@
 </div><a href="/2018/07/02/Netty-In-Action.html">点我阅读更多...</a><div class="article-info clearfix"><meta itemprop="author" itemscope itemtype="https://schema.org/Person"><meta itemprop="name" content="Shenglong"/></meta><ul class="article-info__left-col menu"><li>
             <a class="button button--secondary button--pill button--sm" href="/archive.html?tag=netty">netty</a>
           </li></ul><ul class="article-info__right-col menu"><li class="publish-date"><span>2018年 07月02日</span></li>
-      </ul></div>
-</article><article><h1><a href="/2018/06/13/Today-jobs.html">Today Jobs</a></h1>
-        <div class="article-content"><h1 id="今日工作内容">今日工作内容：</h1>
-<ol>
-  <li>程序中添加照片删除逻辑，可通过修改配置文件设置定时删除的周期；</li>
-  <li>调整相机， 测试程序拍照识别；</li>
-  <li>配合达译工程师调整PLC触发时机</li>
-</ol>
-</div><a href="/2018/06/13/Today-jobs.html">点我阅读更多...</a><div class="article-info clearfix"><meta itemprop="author" itemscope itemtype="https://schema.org/Person"><meta itemprop="name" content="Shenglong"/></meta><ul class="article-info__left-col menu"><li>
-            <a class="button button--secondary button--pill button--sm" href="/archive.html?tag=dairy">dairy</a>
-          </li><li>
-            <a class="button button--secondary button--pill button--sm" href="/archive.html?tag=2018-06-11.weekly">2018-06-11.weekly</a>
-          </li></ul><ul class="article-info__right-col menu"><li class="publish-date"><span>2018年 06月13日</span></li>
       </ul></div>
 </article><article><h1><a href="/2018/06/12/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A61-%E5%91%BD%E9%A2%98%E9%80%BB%E8%BE%91.html">命题逻辑</a></h1>
         <div class="article-content"><h1 id="命题逻辑">命题逻辑</h1>
@@ -387,19 +486,6 @@
 </blockquote>
 </div><a href="/2018/06/12/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A61-%E5%91%BD%E9%A2%98%E9%80%BB%E8%BE%91.html">点我阅读更多...</a><div class="article-info clearfix"><meta itemprop="author" itemscope itemtype="https://schema.org/Person"><meta itemprop="name" content="Shenglong"/></meta><ul class="article-info__left-col menu"><li>
             <a class="button button--secondary button--pill button--sm" href="/archive.html?tag=%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6">离散数学</a>
-          </li></ul><ul class="article-info__right-col menu"><li class="publish-date"><span>2018年 06月12日</span></li>
-      </ul></div>
-</article><article><h1><a href="/2018/06/12/Today-jobs.html">Today jobs</a></h1>
-        <div class="article-content"><h1 id="work-content">Work Content</h1>
-<ol>
-  <li>Optimize UI performance</li>
-  <li>Correct PLC control program transmission problem</li>
-  <li>Tested the bottle-box associating process</li>
-</ol>
-</div><a href="/2018/06/12/Today-jobs.html">点我阅读更多...</a><div class="article-info clearfix"><meta itemprop="author" itemscope itemtype="https://schema.org/Person"><meta itemprop="name" content="Shenglong"/></meta><ul class="article-info__left-col menu"><li>
-            <a class="button button--secondary button--pill button--sm" href="/archive.html?tag=dairy">dairy</a>
-          </li><li>
-            <a class="button button--secondary button--pill button--sm" href="/archive.html?tag=2018-06-11.weekly">2018-06-11.weekly</a>
           </li></ul><ul class="article-info__right-col menu"><li class="publish-date"><span>2018年 06月12日</span></li>
       </ul></div>
 </article></div></div>

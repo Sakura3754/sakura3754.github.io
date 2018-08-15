@@ -1,10 +1,9 @@
 <!DOCTYPE html><html lang="zh">
   <head><meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no"><title>归档 - WaTe</title>
-<meta name="description" content="朝闻道， 夕死可矣
-">
-<link rel="canonical" href="http://localhost:4000/archive.html"><link rel="alternate" type="application/rss+xml" title="WaTe" href="http://localhost:4000/feed.xml">
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no"><title>初识Docker - WaTe</title>
+<meta name="description" content="">
+<link rel="canonical" href="http://localhost:4000/2018/08/04/Docker.html"><link rel="alternate" type="application/rss+xml" title="WaTe" href="http://localhost:4000/feed.xml">
 
 <!-- begin favicon --><link rel="apple-touch-icon" sizes="180x180" href="/assets/apple-touch-icon.png"><link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32x32.png"><link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon-16x16.png"><link rel="manifest" href="/assets/site.webmanifest"><link rel="mask-icon" href="/assets/safari-pinned-tab.svg" color="#fc4d50"><link rel="shortcut icon" href="/assets/favicon.ico">
 <meta name="msapplication-TileColor" content="#ffc40d"><meta name="msapplication-config" content="/assets/browserconfig.xml">
@@ -242,7 +241,7 @@
     window.TEXT_VARIABLES = TEXT_VARIABLES;
   })();
 </script></head>
-  <body><div class="layout--page clearfix"><div class="page__main js-page-main"><div class="page__main-inner">
+  <body><div class="layout--page clearfix"><div class="page__main js-page-main has-aside"><div class="page__main-inner">
       <div class="page__header"><header class="header">
   <div class="main clearfix">
     <div class='logo'><svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
@@ -254,7 +253,7 @@
 	c3-3,2.3-5.2-2.1-6.3S7,1.8,7.7,4.6C7,1.8,5,2.1,1.7,5.3C7.3,11,7.3,16.7,1.7,22.3"/>
 </svg><a title="朝闻道， 夕死可矣
 " href="/">WaTe</a></div><nav>
-      <ul><li class="active"><a href="/archive.html">归档</a></li><li><a href="/about.html">关于</a></li></ul>
+      <ul><li><a href="/archive.html">归档</a></li><li><a href="/about.html">关于</a></li></ul>
     </nav></div>
 </header>
 </div>
@@ -262,289 +261,55 @@
       <div class="page__content">
         <div class ="main">
 
-          <div class="col-2 js-col-2"></div>
+          <div class="col-2 js-col-2"><aside class="page__aside js-page-aside"><div class="toc-aside js-toc-root"></div></aside></div>
 
           <div class="col-1">
-            <article><div class="article-info clearfix"><meta itemprop="author" itemscope itemtype="https://schema.org/Person"><meta itemprop="name" content="Shenglong"/></meta></div>
-<div class="js-article-content"><div class="layout--all js-all">
-  <div class="search-box js-search-box">
-    <div class="icon-search"><i class="fas fa-search"></i></div>
-    <input type="text" />
-    <div class="button icon-clear"><i class="fas fa-times"></i></div>
-  </div><div class="site-tags js-tags">
-  <ul class="menu">
-    <li>
-      <button type="button" class="button button--secondary button--pill tag-button js-article-tag " data-encode="">
-        Show All<div class="tag-button__count">6</div>
-      </button>
-    </li><li><button type="button" class="button button--pill tag-button tag-button-1 js-article-tag" data-encode="Docker">
-          <span>Docker</span><div class="tag-button__count">1</div>
-        </button>
-      </li><li><button type="button" class="button button--pill tag-button tag-button-1 js-article-tag" data-encode="Documents">
-          <span>Documents</span><div class="tag-button__count">1</div>
-        </button>
-      </li><li><button type="button" class="button button--pill tag-button tag-button-2 js-article-tag" data-encode="Hash">
-          <span>Hash</span><div class="tag-button__count">2</div>
-        </button>
-      </li><li><button type="button" class="button button--pill tag-button tag-button-1 js-article-tag" data-encode="Knowledge+Map">
-          <span>Knowledge Map</span><div class="tag-button__count">1</div>
-        </button>
-      </li><li><button type="button" class="button button--pill tag-button tag-button-1 js-article-tag" data-encode="netty">
-          <span>netty</span><div class="tag-button__count">1</div>
-        </button>
-      </li><li><button type="button" class="button button--pill tag-button tag-button-1 js-article-tag" data-encode="%E5%AE%B9%E5%99%A8%E6%8A%80%E6%9C%AF">
-          <span>容器技术</span><div class="tag-button__count">1</div>
-        </button>
-      </li><li><button type="button" class="button button--pill tag-button tag-button-1 js-article-tag" data-encode="%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6">
-          <span>离散数学</span><div class="tag-button__count">1</div>
-        </button>
-      </li><li><button type="button" class="button button--pill tag-button tag-button-2 js-article-tag" data-encode="%E7%AE%97%E6%B3%95">
-          <span>算法</span><div class="tag-button__count">2</div>
-        </button>
-      </li></ul>
+            <article><div class="main__title"><h1>初识Docker</h1></div><div class="article-info clearfix"><meta itemprop="author" itemscope itemtype="https://schema.org/Person"><meta itemprop="name" content="Shenglong"/></meta><ul class="article-info__left-col menu"><li>
+            <a class="button button--secondary button--pill button--sm" href="/archive.html?tag=%E5%AE%B9%E5%99%A8%E6%8A%80%E6%9C%AF">容器技术</a>
+          </li><li>
+            <a class="button button--secondary button--pill button--sm" href="/archive.html?tag=Docker">Docker</a>
+          </li></ul><ul class="article-info__right-col menu"><li class="publish-date"><time datetime="2018-08-04T00:00:00+00:00"
+              itemprop="datePublished">2018年 08月04日
+            </time></li>
+      </ul></div>
+<div class="js-article-content"><div class="layout--article">
+
+  <div class="article-content" itemprop="articleBody">
 </div>
-<div class="js-result layout--all__result"></div>
-</div>
+
+  <footer class="article-footer"><meta itemprop="dateModified" content="2018-08-04T00:00:00+00:00"></footer><div class="article-license"><div class="license card"><div class="clearfix"><a class="octocat" href="https://github.com/Sakura/sakura3754.github.io/tree/master/_posts/2018-08-04-Docker.md">
+        <img alt="View on Github" src="/assets/images/octocat.jpg" />
+      </a><p><a href="https://github.com/Sakura/sakura3754.github.io/tree/master/_posts/2018-08-04-Docker.md">在 Github 上查阅此文。</a></p><p>本文遵守 <a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/">CC-BY-NC-4.0</a> 许可协议。</p><a class="license-img" rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/">
+      <img alt="Creative Commons License" src="/assets/images/license-cc4.png" />
+    </a><p>欢迎转载，转载需注明出处，且禁止用于商业目的。</p>
+  </div>
+</div></div><div class="article-previous-next clearfix"><div class="article-previous"><span>上篇</span><a href="/2018/08/04/Hash%E7%AE%97%E6%B3%95.html">Hash算法</a></div><div class="article-next"><span>下篇</span><a href="/2018/08/04/BKDRHash%E7%AE%97%E6%B3%95.html">BKDRHash算法</a></div></div></div>
 
 <script>(function() {
   var SOURCES = window.TEXT_VARIABLES.sources;
-  function queryString() {
-    // This function is anonymous, is executed immediately and
-    // the return value is assigned to QueryString!
-    var i = 0, queryObj = {}, pair;
-    var queryStr = window.location.search.substring(1);
-    var queryArr = queryStr.split('&');
-    for (i = 0; i < queryArr.length; i++) {
-      pair = queryArr[i].split('=');
-      // If first entry with this name
-      if (typeof queryObj[pair[0]] === 'undefined') {
-        queryObj[pair[0]] = pair[1];
-        // If second entry with this name
-      } else if (typeof queryObj[pair[0]] === 'string') {
-        queryObj[pair[0]] = [queryObj[pair[0]], pair[1]];
-        // If third or later entry with this name
-      } else {
-        queryObj[pair[0]].push(pair[1]);
-      }
-    }
-    return queryObj;
-  }
-
-  function memorize(f) {
-    var cache = {};
-    return function () {
-      var key = Array.prototype.join.call(arguments, ',');
-      if (key in cache) return cache[key];
-      else return cache[key] = f.apply(this, arguments);
-    };
-  }
-
-  function initData(json) {
-    var _data = JSON.parse(json), i, j, cur, _tags;
-    Object.keys(_data).forEach(function(year) {
-      for (i = 0; i < _data[year].length; i++) {
-        cur = _data[year][i], _tags = cur.tags;
-        cur.title = window.decodeUrl(cur.title);
-        cur.url = window.decodeUrl(cur.url);
-        if (_tags && _tags.length > 0) {
-          for (j = 0; j < _tags.length; j++) {
-            _tags[j] = window.decodeUrl(_tags[j]);
-          }
-        }
-      }
-    });
-    return _data;
-  }
-
-  var setUrlQuery = (function() {
-    var baseUrl =  window.location.href.split('?')[0];
-    return function(query) {
-      if (typeof query === 'string') {
-        window.history.replaceState(null, '', baseUrl + query);
-      } else {
-        window.history.replaceState(null, '', baseUrl);
-      }
-    };
-  })();
-
-  var data = initData('{"2018":[{"key":"1","title":"Hash%E7%AE%97%E6%B3%95","tags":["%E7%AE%97%E6%B3%95","Hash"],"url":"%2F2018%2F08%2F04%2FHash%25E7%25AE%2597%25E6%25B3%2595.html","date":"08月04日"},{"key":"2","title":"%E5%88%9D%E8%AF%86Docker","tags":["%E5%AE%B9%E5%99%A8%E6%8A%80%E6%9C%AF","Docker"],"url":"%2F2018%2F08%2F04%2FDocker.html","date":"08月04日"},{"key":"3","title":"BKDRHash%E7%AE%97%E6%B3%95","tags":["%E7%AE%97%E6%B3%95","Hash"],"url":"%2F2018%2F08%2F04%2FBKDRHash%25E7%25AE%2597%25E6%25B3%2595.html","date":"08月04日"},{"key":"4","title":"Mysql+Database","tags":["Documents","Knowledge+Map"],"url":"%2F2018%2F07%2F28%2FKnowledge-Map.html","date":"07月28日"},{"key":"5","title":"%E7%A2%89%E5%A0%A1%E4%BE%A0%E7%9A%84Netty%E5%AD%A6%E4%B9%A0%E6%97%A5%E8%AE%B0","tags":["netty"],"url":"%2F2018%2F07%2F02%2FNetty-In-Action.html","date":"07月02日"},{"key":"6","title":"%E5%91%BD%E9%A2%98%E9%80%BB%E8%BE%91","tags":["%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6"],"url":"%2F2018%2F06%2F12%2F%25E7%25A6%25BB%25E6%2595%25A3%25E6%2595%25B0%25E5%25AD%25A61-%25E5%2591%25BD%25E9%25A2%2598%25E9%2580%25BB%25E8%25BE%2591.html","date":"06月12日"}]}');
-
-  var searchByTag = memorize(function(tag) {
-    var i, j, cur, _tags, _tag, _data = {};
-    Object.keys(data).forEach(function(year) {
-      for (i = 0; i < data[year].length; i++) {
-        cur = data[year][i], _tags = cur.tags;
-        if (_tags && _tags.length > 0) {
-          for (j = 0; j < _tags.length; j++) {
-            _tag = _tags[j];
-            if (_tag === tag) {
-              if (!_data[year]) {
-                _data[year] = [];
-              }
-              _data[year].push(cur);
-              break;
-            }
-          }
-        }
-      }
-    });
-    return _data;
-  });
-
-  var searchByQuery = function(query) {
-    var i, cur, _title, _data = { _: [] };
-    Object.keys(data).forEach(function(year) {
-      for (i = 0; i < data[year].length; i++) {
-        cur = data[year][i], _title = cur.title;
-        if (_title.toLowerCase().indexOf(query.toLowerCase()) >= 0) {
-          _data._.push(cur);
-        }
-      }
-    });
-    return _data;
-  };
-
   window.Lazyload.js(SOURCES.jquery, function() {
-    var $root = $('.js-all');
-    var $searchBox = $('.js-search-box');
-    var $searchInput = $searchBox.children('input');
-    var $searchClear = $searchBox.children('.icon-clear');
-    var $tags = $('.js-tags');
-    var $articleTags = $('.js-article-tag');
-    var $tagShowAll = $('.js-tag-show-all');
-    var $result = $('.js-result');
-    var $lastFocusButton = null;
+    $(function() {
+      var $this ,$scroll;
+      var $articleContent = $('.js-article-content');
+      var hasSidebar = $('.js-page-root').hasClass('layout--page--sidebar');
+      var scroll = hasSidebar ? '.js-page-main' : 'html, body';
+      $scroll = $(scroll);
 
-    function addClass(dom, className) {
-      dom.hasClass(className) || dom.addClass(className);
-    }
-    function removeClass(dom, className) {
-      dom.hasClass(className) && dom.removeClass(className);
-    }
-
-    var renderHeading = memorize(function (year) {
-      return $('<h2 class="year">' + year + '</h2>');
-    });
-    var renderItem = memorize(function (key, title, date, url) {
-      return $('<li><span class="date">' + date + '</span><a class="link" href="' + url + '">' + title + '</a></li>');
-    });
-    function render(data) {
-      var $dom = $('<div></div>'), $section, $ul, i, cur;
-      Object.keys(data).sort(function(a, b) {
-        return b.localeCompare(a);
-      }).forEach(function(year) {
-        $section = $('<section></section>'), $ul = $('<ul></ul>');
-        (year === '_') || $section.append(renderHeading(year));
-        for (i = 0; i < data[year].length; i++) {
-          cur = data[year][i];
-          $ul.append(renderItem(cur.key, cur.title, cur.date, cur.url, cur.tags));
-        }
-        $dom.append($section.append($ul));
+      $articleContent.find('.highlight').each(function() {
+        $this = $(this);
+        $this.attr('data-lang', $this.find('code').attr('data-lang'));
       });
-      return $dom;
-    }
-
-    function searchButtonsByTag(_tag/*raw tag*/) {
-      if (!_tag) {
-        return $tagShowAll;
-      }
-      var _buttons = $articleTags.filter('[data-encode="' + _tag + '"]');
-      if (_buttons.length === 0) {
-        return $tagShowAll;
-      }
-      return _buttons;
-    }
-    function buttonFoucs(target) {
-      if (target) {
-        addClass(target, 'focus');
-        $lastFocusButton && !$lastFocusButton.is(target) && removeClass($lastFocusButton, 'focus');
-        $lastFocusButton = target;
-      }
-    }
-
-    function setIsSearch() {
-      addClass($root, 'search');
-    }
-    function setNotSearch() {
-      removeClass($root, 'search');
-    }
-    function setIsEmpty() {
-      removeClass($searchBox, 'not-empty');
-    }
-    function setNotEmpty() {
-      addClass($searchBox, 'not-empty');
-    }
-    function setSearchBoxVal(val) {
-      ($searchInput.val() === val) || $searchInput.val(val);
-    }
-    function clearSearchBox() {
-      setSearchBoxVal(''); queryInput('');
-    }
-
-    function showAll() {
-      setNotSearch(); setIsEmpty(); buttonFoucs($tagShowAll); setUrlQuery();
-      $result.html(render(data));
-    }
-    function tagSelect(tag/*decode tag*/, target) {
-      var _tag;
-      if (tag === '' || tag === undefined) {
-        showAll();
-      } else {
-        $result.html(render(searchByTag(tag)));
-      }
-      if (target) {
-        buttonFoucs(target);
-        _tag = target.attr('data-encode');
-        if (_tag === '' || typeof _tag !== 'string') {
-          setUrlQuery();
-        } else {
-          setUrlQuery('?tag=' + _tag);
-        }
-      }
-    }
-    function queryInput(query) {
-      if (query === '' || typeof query !== 'string') {
-        showAll();
-      } else {
-        $result.html(render(searchByQuery(query))); setIsSearch(); setNotEmpty(); setUrlQuery('?q=' + query);
-
-      }
-    }
-
-    (function() {
-      $articleTags.removeClass('inactive');
-      var query = queryString(), _tag = query.tag, _q = query.q;
-      if (_tag !== undefined) {
-        query.tag === undefined || (_tag = query.tag);
-        tagSelect(window.decodeUrl(_tag));
-        buttonFoucs(searchButtonsByTag(_tag));
-      } else if (_q !== undefined) {
-        _q = window.decodeUrl(_q);
-        queryInput(_q); setSearchBoxVal(_q);
-      } else {
-        showAll();
-      }
-    })();
-
-    $tags.on('click', 'button', function() {
-      tagSelect($(this).children('span').text(), $(this));
-    });
-
-    $searchInput.on('input', window.throttle(function() {
-      queryInput($(this).val());
-    }, 400));
-    $searchInput.on('focus', function() {
-      addClass($(this), 'focus');
-    });
-    $searchInput.on('blur', function() {
-      removeClass($(this), 'focus');
-    });
-    $searchClear.on('click', function() {
-      clearSearchBox();
+      $articleContent.find('h1, h2, h3, h4, h5, h6').each(function() {
+        $this = $(this);
+        $this.append($('<a class="anchor" aria-hidden="true"></a>').html('<i class="fas fa-anchor"></i>'));
+      });
+      $articleContent.on('click', '.anchor', function() {
+        $scroll.scrollToAnchor('#' + $(this).parent().attr('id'), 400);
+      });
     });
   });
-})();
-</script></div></article>
+})();</script>
+</div></article>
           </div>
         </div>
       </div>
@@ -804,5 +569,67 @@
   });
 })();/*(function () {
 
-})();*/</script></body>
+})();*/</script><script>
+  /* toc must before affix, since affix need to konw toc' height. */(function() {
+  var SOURCES = window.TEXT_VARIABLES.sources;
+  var TOC_SELECTOR = window.TEXT_VARIABLES.site.toc.selectors;
+  window.Lazyload.js(SOURCES.jquery, function() {
+    var $window = $(window);
+    var $articleContent = $('.js-article-content');
+    var $tocRoot = $('.js-toc-root'), $col2 = $('.js-col-2');
+    var toc;
+    var tocDisabled = false;
+    var hasSidebar = $('.js-page-root').hasClass('layout--page--sidebar');
+    var hasToc = $articleContent.find(TOC_SELECTOR).length > 0;
+
+    function disabled() {
+      return $col2.css('display') === 'none' || !hasToc;
+    }
+
+    tocDisabled = disabled();
+
+    setTimeout(function() {
+      toc = $tocRoot.toc({
+        selectors: TOC_SELECTOR,
+        container: $articleContent,
+        scrollTarget: hasSidebar ? '.js-page-main' : null,
+        scroller: hasSidebar ? '.js-page-main' : null,
+        disabled: tocDisabled
+      });
+    }, 1000);
+
+    $window.on('resize', window.throttle(function() {
+      tocDisabled = disabled();
+      toc && toc.setOptions({
+        disabled: tocDisabled
+      });
+    }, 100));
+
+  });
+})();(function() {
+  var SOURCES = window.TEXT_VARIABLES.sources;
+  window.Lazyload.js(SOURCES.jquery, function() {
+    var $window = $(window), $pageFooter = $('.js-page-footer');
+    var $pageAside = $('.js-page-aside');
+    var affix;
+    var tocDisabled = false;
+    var hasSidebar = $('.js-page-root').hasClass('layout--page--sidebar');
+
+    setTimeout(function() {
+      affix = $pageAside.affix({
+        offsetBottom: $pageFooter.outerHeight(),
+        scrollTarget: hasSidebar ? '.js-page-main' : null,
+        scroller: hasSidebar ? '.js-page-main' : null,
+        scroll: hasSidebar ? $('.js-page-main').children() : null,
+        disabled: tocDisabled
+      });
+    }, 1000);
+
+    $window.on('resize', window.throttle(function() {
+      affix && affix.setOptions({
+        disabled: tocDisabled
+      });
+    }, 100));
+  });
+})();</script></body>
 </html>

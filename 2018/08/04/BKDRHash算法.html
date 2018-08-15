@@ -1,9 +1,9 @@
 <!DOCTYPE html><html lang="zh">
   <head><meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no"><title>Today Jobs - WaTe</title>
-<meta name="description" content="今日工作内容：  程序中添加照片删除逻辑，可通过修改配置文件设置定时删除的周期；  调整相机， 测试程序拍照识别；  配合达译工程师调整PLC触发时机">
-<link rel="canonical" href="http://localhost:4000/2018/06/13/Today-jobs.html"><link rel="alternate" type="application/rss+xml" title="WaTe" href="http://localhost:4000/feed.xml">
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no"><title>BKDRHash算法 - WaTe</title>
+<meta name="description" content="BKDRHash算法BKDRHash函数是一种字符串哈希算法, 用于处理大规模字符串数据时为每一个字符串分配一个整数ID。BKDRHash算法java实现:  public static int bkdrStrHash(String str){    char c;    int hash = 0, seed =...">
+<link rel="canonical" href="http://localhost:4000/2018/08/04/BKDRHash%E7%AE%97%E6%B3%95.html"><link rel="alternate" type="application/rss+xml" title="WaTe" href="http://localhost:4000/feed.xml">
 
 <!-- begin favicon --><link rel="apple-touch-icon" sizes="180x180" href="/assets/apple-touch-icon.png"><link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32x32.png"><link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon-16x16.png"><link rel="manifest" href="/assets/site.webmanifest"><link rel="mask-icon" href="/assets/safari-pinned-tab.svg" color="#fc4d50"><link rel="shortcut icon" href="/assets/favicon.ico">
 <meta name="msapplication-TileColor" content="#ffc40d"><meta name="msapplication-config" content="/assets/browserconfig.xml">
@@ -264,31 +264,40 @@
           <div class="col-2 js-col-2"><aside class="page__aside js-page-aside"><div class="toc-aside js-toc-root"></div></aside></div>
 
           <div class="col-1">
-            <article><div class="main__title"><h1>Today Jobs</h1></div><div class="article-info clearfix"><meta itemprop="author" itemscope itemtype="https://schema.org/Person"><meta itemprop="name" content="Shenglong"/></meta><ul class="article-info__left-col menu"><li>
-            <a class="button button--secondary button--pill button--sm" href="/archive.html?tag=dairy">dairy</a>
+            <article><div class="main__title"><h1>BKDRHash算法</h1></div><div class="article-info clearfix"><meta itemprop="author" itemscope itemtype="https://schema.org/Person"><meta itemprop="name" content="Shenglong"/></meta><ul class="article-info__left-col menu"><li>
+            <a class="button button--secondary button--pill button--sm" href="/archive.html?tag=%E7%AE%97%E6%B3%95">算法</a>
           </li><li>
-            <a class="button button--secondary button--pill button--sm" href="/archive.html?tag=2018-06-11.weekly">2018-06-11.weekly</a>
-          </li></ul><ul class="article-info__right-col menu"><li class="publish-date"><time datetime="2018-06-13T00:00:00+00:00"
-              itemprop="datePublished">2018年 06月13日
+            <a class="button button--secondary button--pill button--sm" href="/archive.html?tag=Hash">Hash</a>
+          </li></ul><ul class="article-info__right-col menu"><li class="publish-date"><time datetime="2018-08-04T00:00:00+00:00"
+              itemprop="datePublished">2018年 08月04日
             </time></li>
       </ul></div>
 <div class="js-article-content"><div class="layout--article">
 
-  <div class="article-content" itemprop="articleBody"><h1 id="今日工作内容">今日工作内容：</h1>
-<ol>
-  <li>程序中添加照片删除逻辑，可通过修改配置文件设置定时删除的周期；</li>
-  <li>调整相机， 测试程序拍照识别；</li>
-  <li>配合达译工程师调整PLC触发时机</li>
-</ol>
+  <div class="article-content" itemprop="articleBody"><h3 id="bkdrhash算法">BKDRHash算法</h3>
+<p>BKDRHash函数是一种字符串哈希算法, 用于处理大规模字符串数据时为每一个字符串分配一个整数ID。</p>
+
+<p>BKDRHash算法java实现:</p>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="kd">public</span> <span class="kd">static</span> <span class="kt">int</span> <span class="nf">bkdrStrHash</span><span class="o">(</span><span class="n">String</span> <span class="n">str</span><span class="o">){</span>
+    <span class="kt">char</span> <span class="n">c</span><span class="o">;</span>
+    <span class="kt">int</span> <span class="n">hash</span> <span class="o">=</span> <span class="mi">0</span><span class="o">,</span> <span class="n">seed</span> <span class="o">=</span> <span class="mi">3</span><span class="o">,</span> <span class="n">index</span> <span class="o">=</span> <span class="mi">0</span><span class="o">,</span> <span class="n">len</span> <span class="o">=</span> <span class="n">str</span><span class="o">.</span><span class="na">length</span><span class="o">();</span>
+    <span class="k">for</span><span class="o">(;</span> <span class="n">index</span> <span class="o">&lt;</span> <span class="n">len</span><span class="o">;</span> <span class="n">index</span><span class="o">++)</span> <span class="o">{</span>
+      <span class="n">c</span> <span class="o">=</span> <span class="n">str</span><span class="o">.</span><span class="na">charAt</span><span class="o">(</span><span class="n">index</span><span class="o">);</span>
+      <span class="n">hash</span> <span class="o">+=</span> <span class="n">Math</span><span class="o">.</span><span class="na">pow</span><span class="o">(</span><span class="n">seed</span><span class="o">,</span> <span class="n">len</span> <span class="o">-</span> <span class="n">index</span> <span class="o">-</span> <span class="mi">1</span><span class="o">)</span> <span class="o">*</span> <span class="n">c</span><span class="o">;</span>
+    <span class="o">}</span>
+    <span class="k">return</span> <span class="n">hash</span><span class="o">;</span>
+  <span class="o">}</span>
+</code></pre></div></div>
+
 </div>
 
-  <footer class="article-footer"><meta itemprop="dateModified" content="2018-06-13T00:00:00+00:00"></footer><div class="article-license"><div class="license card"><div class="clearfix"><a class="octocat" href="https://github.com/Sakura/sakura3754.github.io/tree/master/_posts/2018-06-13-Today-jobs.md">
+  <footer class="article-footer"><meta itemprop="dateModified" content="2018-08-04T00:00:00+00:00"></footer><div class="article-license"><div class="license card"><div class="clearfix"><a class="octocat" href="https://github.com/Sakura/sakura3754.github.io/tree/master/_posts/2018-08-04-BKDRHash算法.md">
         <img alt="View on Github" src="/assets/images/octocat.jpg" />
-      </a><p><a href="https://github.com/Sakura/sakura3754.github.io/tree/master/_posts/2018-06-13-Today-jobs.md">在 Github 上查阅此文。</a></p><p>本文遵守 <a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/">CC-BY-NC-4.0</a> 许可协议。</p><a class="license-img" rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/">
+      </a><p><a href="https://github.com/Sakura/sakura3754.github.io/tree/master/_posts/2018-08-04-BKDRHash算法.md">在 Github 上查阅此文。</a></p><p>本文遵守 <a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/">CC-BY-NC-4.0</a> 许可协议。</p><a class="license-img" rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/">
       <img alt="Creative Commons License" src="/assets/images/license-cc4.png" />
     </a><p>欢迎转载，转载需注明出处，且禁止用于商业目的。</p>
   </div>
-</div></div><div class="article-previous-next clearfix"><div class="article-previous"><span>上篇</span><a href="/2018/07/02/Netty-In-Action.html">碉堡侠的Netty学习日记</a></div><div class="article-next"><span>下篇</span><a href="/2018/06/12/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A61-%E5%91%BD%E9%A2%98%E9%80%BB%E8%BE%91.html">命题逻辑</a></div></div></div>
+</div></div><div class="article-previous-next clearfix"><div class="article-previous"><span>上篇</span><a href="/2018/08/04/Docker.html">初识Docker</a></div><div class="article-next"><span>下篇</span><a href="/2018/07/28/Knowledge-Map.html">Mysql Database</a></div></div></div>
 
 <script>(function() {
   var SOURCES = window.TEXT_VARIABLES.sources;

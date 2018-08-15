@@ -1,9 +1,9 @@
 <!DOCTYPE html><html lang="zh">
   <head><meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no"><title>Today jobs - WaTe</title>
-<meta name="description" content="Work Content  Optimize UI performance  Correct PLC control program transmission problem  Tested the bottle-box associating process">
-<link rel="canonical" href="http://localhost:4000/2018/06/12/Today-jobs.html"><link rel="alternate" type="application/rss+xml" title="WaTe" href="http://localhost:4000/feed.xml">
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no"><title>Hash算法 - WaTe</title>
+<meta name="description" content="散列算法散列算法(Hash Function) 又称散列函数、哈希算法, 是一种从任何数据中创建小的数字”指纹”的方法。原理 散列函数把数据压缩成_固定格式_的摘要, 使得数据量变小。该函数将数据打乱混合， 重新创建一个叫做散列值的指纹。散列冲突 又称 “散列碰撞”, 所有散列函数都有如下特性:  如果两个散列值...">
+<link rel="canonical" href="http://localhost:4000/2018/08/04/Hash%E7%AE%97%E6%B3%95.html"><link rel="alternate" type="application/rss+xml" title="WaTe" href="http://localhost:4000/feed.xml">
 
 <!-- begin favicon --><link rel="apple-touch-icon" sizes="180x180" href="/assets/apple-touch-icon.png"><link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32x32.png"><link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon-16x16.png"><link rel="manifest" href="/assets/site.webmanifest"><link rel="mask-icon" href="/assets/safari-pinned-tab.svg" color="#fc4d50"><link rel="shortcut icon" href="/assets/favicon.ico">
 <meta name="msapplication-TileColor" content="#ffc40d"><meta name="msapplication-config" content="/assets/browserconfig.xml">
@@ -264,31 +264,62 @@
           <div class="col-2 js-col-2"><aside class="page__aside js-page-aside"><div class="toc-aside js-toc-root"></div></aside></div>
 
           <div class="col-1">
-            <article><div class="main__title"><h1>Today jobs</h1></div><div class="article-info clearfix"><meta itemprop="author" itemscope itemtype="https://schema.org/Person"><meta itemprop="name" content="Shenglong"/></meta><ul class="article-info__left-col menu"><li>
-            <a class="button button--secondary button--pill button--sm" href="/archive.html?tag=dairy">dairy</a>
+            <article><div class="main__title"><h1>Hash算法</h1></div><div class="article-info clearfix"><meta itemprop="author" itemscope itemtype="https://schema.org/Person"><meta itemprop="name" content="Shenglong"/></meta><ul class="article-info__left-col menu"><li>
+            <a class="button button--secondary button--pill button--sm" href="/archive.html?tag=%E7%AE%97%E6%B3%95">算法</a>
           </li><li>
-            <a class="button button--secondary button--pill button--sm" href="/archive.html?tag=2018-06-11.weekly">2018-06-11.weekly</a>
-          </li></ul><ul class="article-info__right-col menu"><li class="publish-date"><time datetime="2018-06-12T00:00:00+00:00"
-              itemprop="datePublished">2018年 06月12日
+            <a class="button button--secondary button--pill button--sm" href="/archive.html?tag=Hash">Hash</a>
+          </li></ul><ul class="article-info__right-col menu"><li class="publish-date"><time datetime="2018-08-04T00:00:00+00:00"
+              itemprop="datePublished">2018年 08月04日
             </time></li>
       </ul></div>
 <div class="js-article-content"><div class="layout--article">
 
-  <div class="article-content" itemprop="articleBody"><h1 id="work-content">Work Content</h1>
+  <div class="article-content" itemprop="articleBody"><h3 id="散列算法">散列算法</h3>
+<p><em>散列算法(Hash Function)</em> 又称<em>散列函数、哈希算法</em>, 是一种从任何数据中创建小的数字”指纹”的方法。</p>
+
+<p><em>原理</em> 散列函数把数据压缩成_固定格式_的摘要, 使得数据量变小。该函数将数据打乱混合， 重新创建一个叫做散列值的指纹。</p>
+
+<p><em>散列冲突</em> 又称 “散列碰撞”, 所有散列函数都有如下特性:</p>
+<blockquote>
+  <p>如果两个散列值是不相同的, 那么这两个散列值的原始数据必定是不同的。</p>
+</blockquote>
+
+<p>这个特性是因为散列函数都具有_确定性_。然而如果两个散列值相同，两个数据值却可能不同，这种情况称为”散列碰撞”.</p>
+
+<p>散列函数必须具有不可逆性。</p>
+
+<h3 id="散列算法的常见应用">散列算法的常见应用</h3>
+<p>散列函数应用场景广泛, 通常都是为某一目的专门设计的;</p>
+
+<p><em>加密</em> <a href="https://zh.wikipedia.org/wiki/%E5%AF%86%E7%A2%BC%E9%9B%9C%E6%B9%8A%E5%87%BD%E6%95%B8">Wiki 密码散列函数</a></p>
+
+<p>加密散列函数的输入数据通常被称为消息, 输出结果被称为<strong>摘要(digest)</strong>, 主要保证消息在 传输过程中未被篡改;</p>
+
 <ol>
-  <li>Optimize UI performance</li>
-  <li>Correct PLC control program transmission problem</li>
-  <li>Tested the bottle-box associating process</li>
+  <li>理想的加密散列函数应具备的特性:
+    <ul>
+      <li>高效性;</li>
+      <li>不可逆;</li>
+      <li>不可能在不改动散列数值的情况下修改消息内容;</li>
+      <li>对于不同的消息, 不能给出相同的散列值;</li>
+    </ul>
+  </li>
+  <li>保证消息的完整性.</li>
+  <li>散列表.</li>
+  <li>错误检测与矫正</li>
+  <li>语音识别</li>
 </ol>
+
+<p><a href="/2018/08/04/BKDRHash算法">BKDRHash算法及解析</a></p>
 </div>
 
-  <footer class="article-footer"><meta itemprop="dateModified" content="2018-06-12T00:00:00+00:00"></footer><div class="article-license"><div class="license card"><div class="clearfix"><a class="octocat" href="https://github.com/Sakura/sakura3754.github.io/tree/master/_posts/2018-06-12-Today-jobs.md">
+  <footer class="article-footer"><meta itemprop="dateModified" content="2018-08-04T00:00:00+00:00"></footer><div class="article-license"><div class="license card"><div class="clearfix"><a class="octocat" href="https://github.com/Sakura/sakura3754.github.io/tree/master/_posts/2018-08-04-Hash算法.md">
         <img alt="View on Github" src="/assets/images/octocat.jpg" />
-      </a><p><a href="https://github.com/Sakura/sakura3754.github.io/tree/master/_posts/2018-06-12-Today-jobs.md">在 Github 上查阅此文。</a></p><p>本文遵守 <a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/">CC-BY-NC-4.0</a> 许可协议。</p><a class="license-img" rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/">
+      </a><p><a href="https://github.com/Sakura/sakura3754.github.io/tree/master/_posts/2018-08-04-Hash算法.md">在 Github 上查阅此文。</a></p><p>本文遵守 <a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/">CC-BY-NC-4.0</a> 许可协议。</p><a class="license-img" rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/">
       <img alt="Creative Commons License" src="/assets/images/license-cc4.png" />
     </a><p>欢迎转载，转载需注明出处，且禁止用于商业目的。</p>
   </div>
-</div></div><div class="article-previous-next clearfix"><div class="article-previous"><span>上篇</span><a href="/2018/06/12/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A61-%E5%91%BD%E9%A2%98%E9%80%BB%E8%BE%91.html">命题逻辑</a></div></div></div>
+</div></div><div class="article-previous-next clearfix"><div class="article-next"><span>下篇</span><a href="/2018/08/04/Docker.html">初识Docker</a></div></div></div>
 
 <script>(function() {
   var SOURCES = window.TEXT_VARIABLES.sources;
