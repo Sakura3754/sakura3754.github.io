@@ -1,10 +1,9 @@
 <!DOCTYPE html><html lang="zh">
   <head><meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no"><title>404 - WaTe</title>
-<meta name="description" content="朝闻道， 夕死可矣
-">
-<link rel="canonical" href="/404.html"><link rel="alternate" type="application/rss+xml" title="WaTe" href="/feed.xml">
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no"><title>学习PLC: 使用西门子 S7-200 - WaTe</title>
+<meta name="description" content="S7-200数据的存取储存器储存不同类型的数值范围            数制      字节(B)      字(W)      双字(D)                  无符号整数      0到255 0到FF      0到FFFF      0到FFFF FFFF              符号整数...">
+<link rel="canonical" href="/2018/08/15/Learning-PLC-02.html"><link rel="alternate" type="application/rss+xml" title="WaTe" href="/feed.xml">
 
 <!-- begin favicon --><link rel="apple-touch-icon" sizes="180x180" href="/assets/apple-touch-icon.png"><link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32x32.png"><link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon-16x16.png"><link rel="manifest" href="/assets/site.webmanifest"><link rel="mask-icon" href="/assets/safari-pinned-tab.svg" color="#fc4d50"><link rel="shortcut icon" href="/assets/favicon.ico">
 <meta name="msapplication-TileColor" content="#ffc40d"><meta name="msapplication-config" content="/assets/browserconfig.xml">
@@ -242,7 +241,7 @@
     window.TEXT_VARIABLES = TEXT_VARIABLES;
   })();
 </script></head>
-  <body><div class="layout--page clearfix"><div class="page__main js-page-main"><div class="page__main-inner">
+  <body><div class="layout--page clearfix"><div class="page__main js-page-main has-aside"><div class="page__main-inner">
       <div class="page__header"><header class="header">
   <div class="main clearfix">
     <div class='logo'><svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
@@ -262,15 +261,145 @@
       <div class="page__content">
         <div class ="main">
 
-          <div class="col-2 js-col-2"></div>
+          <div class="col-2 js-col-2"><aside class="page__aside js-page-aside"><div class="toc-aside js-toc-root"></div></aside></div>
 
           <div class="col-1">
-            <article><div class="article-info clearfix"><meta itemprop="author" itemscope itemtype="https://schema.org/Person"><meta itemprop="name" content="Shenglong"/></meta></div>
-<div class="js-article-content"><div class="layout--404">
-  <div class="main">
-    <h1>404</h1>
+            <article><div class="main__title"><h1>学习PLC: 使用西门子 S7-200</h1></div><div class="article-info clearfix"><meta itemprop="author" itemscope itemtype="https://schema.org/Person"><meta itemprop="name" content="Shenglong"/></meta><ul class="article-info__left-col menu"><li>
+            <a class="button button--secondary button--pill button--sm" href="/archive.html?tag=PLC">PLC</a>
+          </li><li>
+            <a class="button button--secondary button--pill button--sm" href="/archive.html?tag=Learing+PLC">Learing PLC</a>
+          </li><li>
+            <a class="button button--secondary button--pill button--sm" href="/archive.html?tag=S7-200">S7-200</a>
+          </li></ul><ul class="article-info__right-col menu"><li class="publish-date"><time datetime="2018-08-15T00:00:00+00:00"
+              itemprop="datePublished">2018年 08月15日
+            </time></li>
+      </ul></div>
+<div class="js-article-content"><div class="layout--article">
+
+  <div class="article-content" itemprop="articleBody"><h5 id="s7-200数据的存取">S7-200数据的存取</h5>
+<p>储存器储存不同类型的数值范围</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">数制</th>
+      <th style="text-align: left">字节(B)</th>
+      <th style="text-align: left">字(W)</th>
+      <th style="text-align: left">双字(D)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left">无符号整数</td>
+      <td style="text-align: left">0到255 0到FF</td>
+      <td style="text-align: left">0到FFFF</td>
+      <td style="text-align: left">0到FFFF FFFF</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">符号整数</td>
+      <td style="text-align: left">-128到127</td>
+      <td style="text-align: left">-32768到32767</td>
+      <td style="text-align: left">-2147483648到2147483647</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">实数IEEE 32位浮点数</td>
+      <td style="text-align: left"> </td>
+      <td style="text-align: left"> </td>
+      <td style="text-align: left"> </td>
+    </tr>
+  </tbody>
+</table>
+
+<p>位寻址: 储存器标识符 + 字节地址 + (.) + 字节的位号</p>
+
+<p>常用的储存区: (V, I, Q, M, S, L及SM) 中的数据.若要访问CPU中的一个字节, 字或双字,也必须以类似位寻址的方式给出地址, 包括存储器标识符, 数据大小以及该字节的起始位置;</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    V B 100                  V W 100 
+    | | |_ 字节地址           | | |_ 单字地址
+    | |___ 访问一个字节       | |___ 访问一个单字
+    |_____ 区域标识符         |_____ 区域标识符
+</code></pre></div></div>
+
+<h5 id="存储器分类">存储器分类</h5>
+<h6 id="过程映像输入寄存器-i">过程映像输入寄存器: I</h6>
+<p>在每次扫描周期的开始, CPU对物理输入点进行采样, 并将采样值写入输入过程映像寄存器中, 可以按位、字节、字或双字来存取输入过程映像寄存器中的数据；</p>
+
+<h6 id="过程映像输出寄存器-q">过程映像输出寄存器： Q</h6>
+<p>在每次扫描周期的结尾， CPU将输出过程映像寄存器中的数值复制到物理输出点上。 可以按位， 字节， 字或双字来存取存取输出过程映像寄存器；</p>
+
+<h6 id="变量储存区-v">变量储存区： V</h6>
+<p>可以用V储存器存储程序过程中控制逻辑操作的中间结果，也可以用它来保存于工序或任务组相关的其他数据。</p>
+
+<h6 id="位存储区-m">位存储区： M</h6>
+<p>可以用位存储区位控制继电器存储中间操作状态和控制信息。</p>
+
+<h6 id="定时器存储区-t">定时器存储区: T</h6>
+<p>定时器可用于时间累计, 其分辨率分为1ms, 10ms和100ms三种,定时器有两个变量:</p>
+<ul>
+  <li>当前值: 16位有符号整数, 储存由定时器计数的时间量;</li>
+  <li>定位器位: 在比较当前值和预设值后, 可设置或清除该位, 预设值是定时器指令的一部分.</li>
+</ul>
+
+<h6 id="计数器存储区-c">计数器存储区: C</h6>
+<p>提供三种类型的计数器, 可计算计数器输入上的低-高跳变时间: 一种类型仅计算向上事件, 一种类型仅计算向下事件, 还有一种类型计算向上和向下两种事件. 计数器有两种形式:</p>
+<ul>
+  <li>当前值: 该16位有符号整数可存储累加计数;</li>
+  <li>计数器位: 在比较当前值和预设值后, 可设置或清除该位, 预设值是计数器指令的一部分;</li>
+</ul>
+
+<h6 id="高速计数器-hc">高速计数器: HC</h6>
+<p>高速计数器对告诉事件计数, 它独立于CPU的扫描周期. 高速计数器有一个32位的有符号整数计数值(或当前值). 若要存取高速计数器中的值, 则给出高速计数器的地址, 即存储器类型(HC)加上计数器号. 高速计数器当前值是只读数据, 仅可以作为双字(32位)来寻址.</p>
+
+<h6 id="累加器-ac">累加器: AC</h6>
+<p>累加器是可以像存储器一样使用的读写设备. 可以用它来向子程序传递参数, 也可以从子程序返回参数, 以及用来存储计算的中间值. S7-200 提供4个32位累加器(AC0 ~ AC3);</p>
+
+<h6 id="特殊存储器-sm">特殊存储器: SM</h6>
+<p>SM位为CPU与用户程序之间传递信息提供了一种手段. 可以使用这些位来选择和控制S7-200CPU的某些特殊功能;</p>
+
+<h6 id="局部存储区-l">局部存储区: L</h6>
+<p>S7-200有64个字节的局部存储器, 其中60个字节可以用作临时存储器或者给子程序传递参数;</p>
+
+<p>局部存储器和变量存储器很相似, 但有一处区别. 变量存储器是全局有效的, 而局部存储器只在局部有效. 全局是指同一个储存器可以被任何程序存取(主程序, 子程序和中断程序). 局部是指存储区和特定的程序相关联. S7-200给主程序分配64个字节局部存储器; 给每一级子程序嵌套分配64个字节的局部存储区; 同样,给中断程序分配64个字节局部存储区;</p>
+
+<p>S7-200根据需要分配局部存储区. 也就是说, 当主程序执行时分配给子程序和中断程序的局部存储区是不存在的(并未分配)当发生中断或子程序调用时才会进行分配.</p>
+
+<h6 id="模拟量输入-ai">模拟量输入: AI</h6>
+<p>S7-200将模拟量值(如温度,电压)转换成一个字长(16位)的数字量. 可以用区域标识符(AI), 数据长度(W)及字节的 起始地址来存取这些值. 因为模拟输入量位一个字长, 且从偶数位开始. 所以必须用偶数字节地址(如AIW2, AIW4)来存取这些值. <strong>模拟量输入为只读数据</strong></p>
+</div>
+
+  <footer class="article-footer"><meta itemprop="dateModified" content="2018-08-15T00:00:00+00:00"></footer><div class="article-license"><div class="license card"><div class="clearfix"><a class="octocat" href="https://github.com/Sakura/sakura3754.github.io/tree/master/_posts/2018-08-15-Learning-PLC-02.md">
+        <img alt="View on Github" src="/assets/images/octocat.jpg" />
+      </a><p><a href="https://github.com/Sakura/sakura3754.github.io/tree/master/_posts/2018-08-15-Learning-PLC-02.md">在 Github 上查阅此文。</a></p><p>本文遵守 <a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/">CC-BY-NC-4.0</a> 许可协议。</p><a class="license-img" rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/">
+      <img alt="Creative Commons License" src="/assets/images/license-cc4.png" />
+    </a><p>欢迎转载，转载需注明出处，且禁止用于商业目的。</p>
   </div>
-</div></div></article>
+</div></div><div class="article-previous-next clearfix"><div class="article-next"><span>下篇</span><a href="/2018/08/15/Learning-PLC-01.html">学习PLC: 使用西门子S7-200 01</a></div></div></div>
+
+<script>(function() {
+  var SOURCES = window.TEXT_VARIABLES.sources;
+  window.Lazyload.js(SOURCES.jquery, function() {
+    $(function() {
+      var $this ,$scroll;
+      var $articleContent = $('.js-article-content');
+      var hasSidebar = $('.js-page-root').hasClass('layout--page--sidebar');
+      var scroll = hasSidebar ? '.js-page-main' : 'html, body';
+      $scroll = $(scroll);
+
+      $articleContent.find('.highlight').each(function() {
+        $this = $(this);
+        $this.attr('data-lang', $this.find('code').attr('data-lang'));
+      });
+      $articleContent.find('h1, h2, h3, h4, h5, h6').each(function() {
+        $this = $(this);
+        $this.append($('<a class="anchor" aria-hidden="true"></a>').html('<i class="fas fa-anchor"></i>'));
+      });
+      $articleContent.on('click', '.anchor', function() {
+        $scroll.scrollToAnchor('#' + $(this).parent().attr('id'), 400);
+      });
+    });
+  });
+})();</script>
+</div></article>
           </div>
         </div>
       </div>
@@ -530,5 +659,67 @@
   });
 })();/*(function () {
 
-})();*/</script></body>
+})();*/</script><script>
+  /* toc must before affix, since affix need to konw toc' height. */(function() {
+  var SOURCES = window.TEXT_VARIABLES.sources;
+  var TOC_SELECTOR = window.TEXT_VARIABLES.site.toc.selectors;
+  window.Lazyload.js(SOURCES.jquery, function() {
+    var $window = $(window);
+    var $articleContent = $('.js-article-content');
+    var $tocRoot = $('.js-toc-root'), $col2 = $('.js-col-2');
+    var toc;
+    var tocDisabled = false;
+    var hasSidebar = $('.js-page-root').hasClass('layout--page--sidebar');
+    var hasToc = $articleContent.find(TOC_SELECTOR).length > 0;
+
+    function disabled() {
+      return $col2.css('display') === 'none' || !hasToc;
+    }
+
+    tocDisabled = disabled();
+
+    setTimeout(function() {
+      toc = $tocRoot.toc({
+        selectors: TOC_SELECTOR,
+        container: $articleContent,
+        scrollTarget: hasSidebar ? '.js-page-main' : null,
+        scroller: hasSidebar ? '.js-page-main' : null,
+        disabled: tocDisabled
+      });
+    }, 1000);
+
+    $window.on('resize', window.throttle(function() {
+      tocDisabled = disabled();
+      toc && toc.setOptions({
+        disabled: tocDisabled
+      });
+    }, 100));
+
+  });
+})();(function() {
+  var SOURCES = window.TEXT_VARIABLES.sources;
+  window.Lazyload.js(SOURCES.jquery, function() {
+    var $window = $(window), $pageFooter = $('.js-page-footer');
+    var $pageAside = $('.js-page-aside');
+    var affix;
+    var tocDisabled = false;
+    var hasSidebar = $('.js-page-root').hasClass('layout--page--sidebar');
+
+    setTimeout(function() {
+      affix = $pageAside.affix({
+        offsetBottom: $pageFooter.outerHeight(),
+        scrollTarget: hasSidebar ? '.js-page-main' : null,
+        scroller: hasSidebar ? '.js-page-main' : null,
+        scroll: hasSidebar ? $('.js-page-main').children() : null,
+        disabled: tocDisabled
+      });
+    }, 1000);
+
+    $window.on('resize', window.throttle(function() {
+      affix && affix.setOptions({
+        disabled: tocDisabled
+      });
+    }, 100));
+  });
+})();</script></body>
 </html>

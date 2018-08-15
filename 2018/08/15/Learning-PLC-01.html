@@ -1,10 +1,9 @@
 <!DOCTYPE html><html lang="zh">
   <head><meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no"><title>404 - WaTe</title>
-<meta name="description" content="朝闻道， 夕死可矣
-">
-<link rel="canonical" href="/404.html"><link rel="alternate" type="application/rss+xml" title="WaTe" href="/feed.xml">
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no"><title>学习PLC: 使用西门子S7-200 01 - WaTe</title>
+<meta name="description" content="S7-200S7-200 如何执行控制逻辑基本流程  CPU读取输入状态，将输入状态复制到过程映像输入寄存器；  执行程序中的控制逻辑: S7-200执行程序指令, 并在不同的储存区存储数值；  处理通讯请求: 执行通讯任务；  执行CPU自检诊断: 确保固件,程序储存器和所有扩展模块正常运行;  写入输出: 将...">
+<link rel="canonical" href="/2018/08/15/Learning-PLC-01.html"><link rel="alternate" type="application/rss+xml" title="WaTe" href="/feed.xml">
 
 <!-- begin favicon --><link rel="apple-touch-icon" sizes="180x180" href="/assets/apple-touch-icon.png"><link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32x32.png"><link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon-16x16.png"><link rel="manifest" href="/assets/site.webmanifest"><link rel="mask-icon" href="/assets/safari-pinned-tab.svg" color="#fc4d50"><link rel="shortcut icon" href="/assets/favicon.ico">
 <meta name="msapplication-TileColor" content="#ffc40d"><meta name="msapplication-config" content="/assets/browserconfig.xml">
@@ -242,7 +241,7 @@
     window.TEXT_VARIABLES = TEXT_VARIABLES;
   })();
 </script></head>
-  <body><div class="layout--page clearfix"><div class="page__main js-page-main"><div class="page__main-inner">
+  <body><div class="layout--page clearfix"><div class="page__main js-page-main has-aside"><div class="page__main-inner">
       <div class="page__header"><header class="header">
   <div class="main clearfix">
     <div class='logo'><svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
@@ -262,15 +261,89 @@
       <div class="page__content">
         <div class ="main">
 
-          <div class="col-2 js-col-2"></div>
+          <div class="col-2 js-col-2"><aside class="page__aside js-page-aside"><div class="toc-aside js-toc-root"></div></aside></div>
 
           <div class="col-1">
-            <article><div class="article-info clearfix"><meta itemprop="author" itemscope itemtype="https://schema.org/Person"><meta itemprop="name" content="Shenglong"/></meta></div>
-<div class="js-article-content"><div class="layout--404">
-  <div class="main">
-    <h1>404</h1>
+            <article><div class="main__title"><h1>学习PLC: 使用西门子S7-200 01</h1></div><div class="article-info clearfix"><meta itemprop="author" itemscope itemtype="https://schema.org/Person"><meta itemprop="name" content="Shenglong"/></meta><ul class="article-info__left-col menu"><li>
+            <a class="button button--secondary button--pill button--sm" href="/archive.html?tag=PLC">PLC</a>
+          </li><li>
+            <a class="button button--secondary button--pill button--sm" href="/archive.html?tag=Learning+PLC">Learning PLC</a>
+          </li><li>
+            <a class="button button--secondary button--pill button--sm" href="/archive.html?tag=S7-200">S7-200</a>
+          </li></ul><ul class="article-info__right-col menu"><li class="publish-date"><time datetime="2018-08-15T00:00:00+00:00"
+              itemprop="datePublished">2018年 08月15日
+            </time></li>
+      </ul></div>
+<div class="js-article-content"><div class="layout--article">
+
+  <div class="article-content" itemprop="articleBody"><p>S7-200</p>
+<h4 id="s7-200-如何执行控制逻辑">S7-200 如何执行控制逻辑</h4>
+<h5 id="基本流程">基本流程</h5>
+<ul>
+  <li>CPU读取输入状态，将输入状态复制到<strong>过程映像输入寄存器</strong>；</li>
+  <li>执行程序中的控制逻辑: S7-200执行程序指令, 并在不同的储存区存储数值；</li>
+  <li>处理通讯请求: 执行通讯任务；</li>
+  <li>执行CPU自检诊断: 确保固件,程序储存器和所有扩展模块正常运行;</li>
+  <li>写入输出: 将储存在过程映像输出寄存器中的数值写入到实际输出;</li>
+</ul>
+
+<h6 id="读取输入">读取输入</h6>
+<p><em>数字量输入</em>: 每个扫描周期从数字量输入的当前值开始读取, 然后将这些值写入到过程映像输入寄存器;
+<em>模拟量输入</em>: 除非启用了模拟量输入过滤, 否则S7-200在正常扫描周期中不更新来自扩展模块的模拟量输入;</p>
+<blockquote>
+  <p>模拟量滤波能获取到比较稳定的信号;</p>
+</blockquote>
+
+<p><code class="highlighter-rouge">Question: 什么是数字量和模拟量</code></p>
+
+<h6 id="执行程序">执行程序</h6>
+<p>在扫描周期的执行程序阶段, CPU从头至尾执行应用程序. 在程序或中断程序执行过程当中, 可以立即调用IO指令访问输入与输出;</p>
+<blockquote>
+  <p>如果程序中使用了中断, 中断程序会作为程序一部分储存. 但是中断程序不作为扫描周期的一部分来执行,只有在中断事件发生时才会调用</p>
+</blockquote>
+
+<p>如果在程序中使用了子程序, 子程序会作为程序的一部分储存. 主程序调用子程序时, 嵌套深度是8. 由中断程序开始时子程序嵌套深度为1;</p>
+
+<p><code class="highlighter-rouge">局部储存区 L</code></p>
+
+<h6 id="写数字输出">写数字输出</h6>
+<p>在每个扫描周期结尾, CPU把储存在输出映像寄存器中的数据写到数字输出点. (模拟量输出直接刷新, 与扫描周期无关)</p>
+
+</div>
+
+  <footer class="article-footer"><meta itemprop="dateModified" content="2018-08-15T00:00:00+00:00"></footer><div class="article-license"><div class="license card"><div class="clearfix"><a class="octocat" href="https://github.com/Sakura/sakura3754.github.io/tree/master/_posts/2018-08-15-Learning-PLC-01.md">
+        <img alt="View on Github" src="/assets/images/octocat.jpg" />
+      </a><p><a href="https://github.com/Sakura/sakura3754.github.io/tree/master/_posts/2018-08-15-Learning-PLC-01.md">在 Github 上查阅此文。</a></p><p>本文遵守 <a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/">CC-BY-NC-4.0</a> 许可协议。</p><a class="license-img" rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/">
+      <img alt="Creative Commons License" src="/assets/images/license-cc4.png" />
+    </a><p>欢迎转载，转载需注明出处，且禁止用于商业目的。</p>
   </div>
-</div></div></article>
+</div></div><div class="article-previous-next clearfix"><div class="article-previous"><span>上篇</span><a href="/2018/08/15/Learning-PLC-02.html">学习PLC: 使用西门子 S7-200</a></div><div class="article-next"><span>下篇</span><a href="/2018/08/04/Hash%E7%AE%97%E6%B3%95.html">Hash算法</a></div></div></div>
+
+<script>(function() {
+  var SOURCES = window.TEXT_VARIABLES.sources;
+  window.Lazyload.js(SOURCES.jquery, function() {
+    $(function() {
+      var $this ,$scroll;
+      var $articleContent = $('.js-article-content');
+      var hasSidebar = $('.js-page-root').hasClass('layout--page--sidebar');
+      var scroll = hasSidebar ? '.js-page-main' : 'html, body';
+      $scroll = $(scroll);
+
+      $articleContent.find('.highlight').each(function() {
+        $this = $(this);
+        $this.attr('data-lang', $this.find('code').attr('data-lang'));
+      });
+      $articleContent.find('h1, h2, h3, h4, h5, h6').each(function() {
+        $this = $(this);
+        $this.append($('<a class="anchor" aria-hidden="true"></a>').html('<i class="fas fa-anchor"></i>'));
+      });
+      $articleContent.on('click', '.anchor', function() {
+        $scroll.scrollToAnchor('#' + $(this).parent().attr('id'), 400);
+      });
+    });
+  });
+})();</script>
+</div></article>
           </div>
         </div>
       </div>
@@ -530,5 +603,67 @@
   });
 })();/*(function () {
 
-})();*/</script></body>
+})();*/</script><script>
+  /* toc must before affix, since affix need to konw toc' height. */(function() {
+  var SOURCES = window.TEXT_VARIABLES.sources;
+  var TOC_SELECTOR = window.TEXT_VARIABLES.site.toc.selectors;
+  window.Lazyload.js(SOURCES.jquery, function() {
+    var $window = $(window);
+    var $articleContent = $('.js-article-content');
+    var $tocRoot = $('.js-toc-root'), $col2 = $('.js-col-2');
+    var toc;
+    var tocDisabled = false;
+    var hasSidebar = $('.js-page-root').hasClass('layout--page--sidebar');
+    var hasToc = $articleContent.find(TOC_SELECTOR).length > 0;
+
+    function disabled() {
+      return $col2.css('display') === 'none' || !hasToc;
+    }
+
+    tocDisabled = disabled();
+
+    setTimeout(function() {
+      toc = $tocRoot.toc({
+        selectors: TOC_SELECTOR,
+        container: $articleContent,
+        scrollTarget: hasSidebar ? '.js-page-main' : null,
+        scroller: hasSidebar ? '.js-page-main' : null,
+        disabled: tocDisabled
+      });
+    }, 1000);
+
+    $window.on('resize', window.throttle(function() {
+      tocDisabled = disabled();
+      toc && toc.setOptions({
+        disabled: tocDisabled
+      });
+    }, 100));
+
+  });
+})();(function() {
+  var SOURCES = window.TEXT_VARIABLES.sources;
+  window.Lazyload.js(SOURCES.jquery, function() {
+    var $window = $(window), $pageFooter = $('.js-page-footer');
+    var $pageAside = $('.js-page-aside');
+    var affix;
+    var tocDisabled = false;
+    var hasSidebar = $('.js-page-root').hasClass('layout--page--sidebar');
+
+    setTimeout(function() {
+      affix = $pageAside.affix({
+        offsetBottom: $pageFooter.outerHeight(),
+        scrollTarget: hasSidebar ? '.js-page-main' : null,
+        scroller: hasSidebar ? '.js-page-main' : null,
+        scroll: hasSidebar ? $('.js-page-main').children() : null,
+        disabled: tocDisabled
+      });
+    }, 1000);
+
+    $window.on('resize', window.throttle(function() {
+      affix && affix.setOptions({
+        disabled: tocDisabled
+      });
+    }, 100));
+  });
+})();</script></body>
 </html>
