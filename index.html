@@ -267,7 +267,147 @@
           <div class="col-1">
             <article><div class="article-info clearfix"><meta itemprop="author" itemscope itemtype="https://schema.org/Person"><meta itemprop="name" content="Shenglong"/></meta></div>
 <div class="js-article-content"><div class="layout--home">
-  <div class="post-list"><article><h1><a href="/2018/08/04/Hash%E7%AE%97%E6%B3%95.html">Hash算法</a></h1>
+  <div class="post-list"><article><h1><a href="/2018/08/15/Learning-PLC-02.html">学习PLC: 使用西门子 S7-200</a></h1>
+        <div class="article-content"><h5 id="s7-200数据的存取">S7-200数据的存取</h5>
+<p>储存器储存不同类型的数值范围</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">数制</th>
+      <th style="text-align: left">字节(B)</th>
+      <th style="text-align: left">字(W)</th>
+      <th style="text-align: left">双字(D)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left">无符号整数</td>
+      <td style="text-align: left">0到255 0到FF</td>
+      <td style="text-align: left">0到FFFF</td>
+      <td style="text-align: left">0到FFFF FFFF</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">符号整数</td>
+      <td style="text-align: left">-128到127</td>
+      <td style="text-align: left">-32768到32767</td>
+      <td style="text-align: left">-2147483648到2147483647</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">实数IEEE 32位浮点数</td>
+      <td style="text-align: left"> </td>
+      <td style="text-align: left"> </td>
+      <td style="text-align: left"> </td>
+    </tr>
+  </tbody>
+</table>
+
+<p>位寻址: 储存器标识符 + 字节地址 + (.) + 字节的位号</p>
+
+<p>常用的储存区: (V, I, Q, M, S, L及SM) 中的数据.若要访问CPU中的一个字节, 字或双字,也必须以类似位寻址的方式给出地址, 包括存储器标识符, 数据大小以及该字节的起始位置;</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    V B 100                  V W 100 
+    | | |_ 字节地址           | | |_ 单字地址
+    | |___ 访问一个字节       | |___ 访问一个单字
+    |_____ 区域标识符         |_____ 区域标识符
+</code></pre></div></div>
+
+<h5 id="存储器分类">存储器分类</h5>
+<h6 id="过程映像输入寄存器-i">过程映像输入寄存器: I</h6>
+<p>在每次扫描周期的开始, CPU对物理输入点进行采样, 并将采样值写入输入过程映像寄存器中, 可以按位、字节、字或双字来存取输入过程映像寄存器中的数据；</p>
+
+<h6 id="过程映像输出寄存器-q">过程映像输出寄存器： Q</h6>
+<p>在每次扫描周期的结尾， CPU将输出过程映像寄存器中的数值复制到物理输出点上。 可以按位， 字节， 字或双字来存取存取输出过程映像寄存器；</p>
+
+<h6 id="变量储存区-v">变量储存区： V</h6>
+<p>可以用V储存器存储程序过程中控制逻辑操作的中间结果，也可以用它来保存于工序或任务组相关的其他数据。</p>
+
+<h6 id="位存储区-m">位存储区： M</h6>
+<p>可以用位存储区位控制继电器存储中间操作状态和控制信息。</p>
+
+<h6 id="定时器存储区-t">定时器存储区: T</h6>
+<p>定时器可用于时间累计, 其分辨率分为1ms, 10ms和100ms三种,定时器有两个变量:</p>
+<ul>
+  <li>当前值: 16位有符号整数, 储存由定时器计数的时间量;</li>
+  <li>定位器位: 在比较当前值和预设值后, 可设置或清除该位, 预设值是定时器指令的一部分.</li>
+</ul>
+
+<h6 id="计数器存储区-c">计数器存储区: C</h6>
+<p>提供三种类型的计数器, 可计算计数器输入上的低-高跳变时间: 一种类型仅计算向上事件, 一种类型仅计算向下事件, 还有一种类型计算向上和向下两种事件. 计数器有两种形式:</p>
+<ul>
+  <li>当前值: 该16位有符号整数可存储累加计数;</li>
+  <li>计数器位: 在比较当前值和预设值后, 可设置或清除该位, 预设值是计数器指令的一部分;</li>
+</ul>
+
+<h6 id="高速计数器-hc">高速计数器: HC</h6>
+<p>高速计数器对告诉事件计数, 它独立于CPU的扫描周期. 高速计数器有一个32位的有符号整数计数值(或当前值). 若要存取高速计数器中的值, 则给出高速计数器的地址, 即存储器类型(HC)加上计数器号. 高速计数器当前值是只读数据, 仅可以作为双字(32位)来寻址.</p>
+
+<h6 id="累加器-ac">累加器: AC</h6>
+<p>累加器是可以像存储器一样使用的读写设备. 可以用它来向子程序传递参数, 也可以从子程序返回参数, 以及用来存储计算的中间值. S7-200 提供4个32位累加器(AC0 ~ AC3);</p>
+
+<h6 id="特殊存储器-sm">特殊存储器: SM</h6>
+<p>SM位为CPU与用户程序之间传递信息提供了一种手段. 可以使用这些位来选择和控制S7-200CPU的某些特殊功能;</p>
+
+<h6 id="局部存储区-l">局部存储区: L</h6>
+<p>S7-200有64个字节的局部存储器, 其中60个字节可以用作临时存储器或者给子程序传递参数;</p>
+
+<p>局部存储器和变量存储器很相似, 但有一处区别. 变量存储器是全局有效的, 而局部存储器只在局部有效. 全局是指同一个储存器可以被任何程序存取(主程序, 子程序和中断程序). 局部是指存储区和特定的程序相关联. S7-200给主程序分配64个字节局部存储器; 给每一级子程序嵌套分配64个字节的局部存储区; 同样,给中断程序分配64个字节局部存储区;</p>
+
+<p>S7-200根据需要分配局部存储区. 也就是说, 当主程序执行时分配给子程序和中断程序的局部存储区是不存在的(并未分配)当发生中断或子程序调用时才会进行分配.</p>
+
+<h6 id="模拟量输入-ai">模拟量输入: AI</h6>
+<p>S7-200将模拟量值(如温度,电压)转换成一个字长(16位)的数字量. 可以用区域标识符(AI), 数据长度(W)及字节的 起始地址来存取这些值. 因为模拟输入量位一个字长, 且从偶数位开始. 所以必须用偶数字节地址(如AIW2, AIW4)来存取这些值. <strong>模拟量输入为只读数据</strong></p>
+</div><a href="/2018/08/15/Learning-PLC-02.html">点我阅读更多...</a><div class="article-info clearfix"><meta itemprop="author" itemscope itemtype="https://schema.org/Person"><meta itemprop="name" content="Shenglong"/></meta><ul class="article-info__left-col menu"><li>
+            <a class="button button--secondary button--pill button--sm" href="/archive.html?tag=PLC">PLC</a>
+          </li><li>
+            <a class="button button--secondary button--pill button--sm" href="/archive.html?tag=Learing+PLC">Learing PLC</a>
+          </li><li>
+            <a class="button button--secondary button--pill button--sm" href="/archive.html?tag=S7-200">S7-200</a>
+          </li></ul><ul class="article-info__right-col menu"><li class="publish-date"><span>2018年 08月15日</span></li>
+      </ul></div>
+</article><article><h1><a href="/2018/08/15/Learning-PLC-01.html">学习PLC: 使用西门子S7-200 01</a></h1>
+        <div class="article-content"><p>S7-200</p>
+<h4 id="s7-200-如何执行控制逻辑">S7-200 如何执行控制逻辑</h4>
+<h5 id="基本流程">基本流程</h5>
+<ul>
+  <li>CPU读取输入状态，将输入状态复制到<strong>过程映像输入寄存器</strong>；</li>
+  <li>执行程序中的控制逻辑: S7-200执行程序指令, 并在不同的储存区存储数值；</li>
+  <li>处理通讯请求: 执行通讯任务；</li>
+  <li>执行CPU自检诊断: 确保固件,程序储存器和所有扩展模块正常运行;</li>
+  <li>写入输出: 将储存在过程映像输出寄存器中的数值写入到实际输出;</li>
+</ul>
+
+<h6 id="读取输入">读取输入</h6>
+<p><em>数字量输入</em>: 每个扫描周期从数字量输入的当前值开始读取, 然后将这些值写入到过程映像输入寄存器;
+<em>模拟量输入</em>: 除非启用了模拟量输入过滤, 否则S7-200在正常扫描周期中不更新来自扩展模块的模拟量输入;</p>
+<blockquote>
+  <p>模拟量滤波能获取到比较稳定的信号;</p>
+</blockquote>
+
+<p><code class="highlighter-rouge">Question: 什么是数字量和模拟量</code></p>
+
+<h6 id="执行程序">执行程序</h6>
+<p>在扫描周期的执行程序阶段, CPU从头至尾执行应用程序. 在程序或中断程序执行过程当中, 可以立即调用IO指令访问输入与输出;</p>
+<blockquote>
+  <p>如果程序中使用了中断, 中断程序会作为程序一部分储存. 但是中断程序不作为扫描周期的一部分来执行,只有在中断事件发生时才会调用</p>
+</blockquote>
+
+<p>如果在程序中使用了子程序, 子程序会作为程序的一部分储存. 主程序调用子程序时, 嵌套深度是8. 由中断程序开始时子程序嵌套深度为1;</p>
+
+<p><code class="highlighter-rouge">局部储存区 L</code></p>
+
+<h6 id="写数字输出">写数字输出</h6>
+<p>在每个扫描周期结尾, CPU把储存在输出映像寄存器中的数据写到数字输出点. (模拟量输出直接刷新, 与扫描周期无关)</p>
+
+</div><a href="/2018/08/15/Learning-PLC-01.html">点我阅读更多...</a><div class="article-info clearfix"><meta itemprop="author" itemscope itemtype="https://schema.org/Person"><meta itemprop="name" content="Shenglong"/></meta><ul class="article-info__left-col menu"><li>
+            <a class="button button--secondary button--pill button--sm" href="/archive.html?tag=PLC">PLC</a>
+          </li><li>
+            <a class="button button--secondary button--pill button--sm" href="/archive.html?tag=Learning+PLC">Learning PLC</a>
+          </li><li>
+            <a class="button button--secondary button--pill button--sm" href="/archive.html?tag=S7-200">S7-200</a>
+          </li></ul><ul class="article-info__right-col menu"><li class="publish-date"><span>2018年 08月15日</span></li>
+      </ul></div>
+</article><article><h1><a href="/2018/08/04/Hash%E7%AE%97%E6%B3%95.html">Hash算法</a></h1>
         <div class="article-content"><h3 id="散列算法">散列算法</h3>
 <p><em>散列算法(Hash Function)</em> 又称<em>散列函数、哈希算法</em>, 是一种从任何数据中创建小的数字”指纹”的方法。</p>
 
